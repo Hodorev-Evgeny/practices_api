@@ -3,9 +3,10 @@ from fastapi import FastAPI, HTTPException
 from sqlalchemy import select, update, delete
 from sqlalchemy.exc import SQLAlchemyError
 
-from models.book import BookShem
-from routes.book import BookModel
-from deps import *
+from api.models.book import BookShem
+from api.routes.book import BookModel
+from api.middleware import ProcessingMiddleware
+from api.deps import *
 
 
 app = FastAPI()
@@ -60,6 +61,9 @@ async def delete_book(id: int, session: SessionDep):
         return {'status': 'success', 'message': 'Book deleted successfully!'}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+app.add_middleware(ProcessingMiddleware)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 from fastapi import Depends
 from typing import Annotated
-from models.db_session import get_session
-from routes.pagination import PaginationParms
+from api.models.db_session import get_session
+from api.routes.pagination import PaginationParms
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
